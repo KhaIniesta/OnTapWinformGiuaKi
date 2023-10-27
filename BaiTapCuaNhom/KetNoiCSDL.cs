@@ -37,7 +37,7 @@ namespace BaiTapCuaNhom
             adapter.Fill(dt);
             return dt;
         }
-        public int ThemSinhVien(String MaSV, String HoSV, String TenSV, DateTime NgaySinh, String GioiTinh, String MaKhoa, String AvartarDirec)
+        public int ThemSinhVien(String MaSV, String HoSV, String TenSV, DateTime NgaySinh, String GioiTinh, String MaKhoa, byte[] imageData)
         {
             String sql = "Insert into SinhVien values(@MaSV, @HoSV, @TenSV, @NgaySinh, @GioiTinh, @MaKhoa, @Avartar)";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -48,13 +48,6 @@ namespace BaiTapCuaNhom
             cmd.Parameters.AddWithValue("@NgaySinh", NgaySinh.ToShortDateString());
             cmd.Parameters.AddWithValue("@GioiTinh", GioiTinh);
             cmd.Parameters.AddWithValue("@MaKhoa", MaKhoa);
-
-            byte[] imageData = null;
-            using (FileStream fs = new FileStream(AvartarDirec, FileMode.Open, FileAccess.Read))
-            {
-                imageData = new byte[fs.Length];
-                fs.Read(imageData, 0, (int)fs.Length);
-            }
             cmd.Parameters.AddWithValue("@Avartar", imageData);
 
             return cmd.ExecuteNonQuery();
@@ -70,26 +63,18 @@ namespace BaiTapCuaNhom
 
             return cmd.ExecuteNonQuery();
         }
-        public int SuaSinhVien(String MaSV, String HoSV, String TenSV, DateTime NgaySinh, String GioiTinh, String MaKhoa, String AvartarDirec)
+        public int SuaSinhVien(String MaSV, String HoSV, String TenSV, DateTime NgaySinh, String GioiTinh, String MaKhoa, byte[] imageData)
         {
             String sql;
             SqlCommand cmd;
 
-            if (AvartarDirec != "")
+            if (imageData != null)
             {
                 sql = "UPDATE SinhVien" +
                     " SET HoSV=@HoSV, TenSV=@TenSV, NgaySinh=@NgaySinh, GioiTinh=@GioiTinh, MaKhoa=@MaKhoa, Avartar=@Avartar" +
                     " WHERE MaSV = @MaSV";
 
                 cmd = new SqlCommand (sql, conn);
-
-                byte[] imageData = null;
-                using (FileStream fs = new FileStream(AvartarDirec, FileMode.Open, FileAccess.Read))
-                {
-                    imageData = new byte[fs.Length];
-                    fs.Read(imageData, 0, (int)fs.Length);
-                }
-
                 cmd.Parameters.AddWithValue("@Avartar", imageData);
             }
             else

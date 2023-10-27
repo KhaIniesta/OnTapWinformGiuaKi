@@ -95,13 +95,7 @@ namespace BaiTapCuaNhom
 
             if (res > 0)
             {
-                DialogResult dlRes = MessageBox.Show(
-                    "Xóa sinh viên thành công!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1
-                    );
+                DialogResult dlRes = MessageBox.Show("Xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
                 if (dlRes == DialogResult.OK)
                 {
@@ -109,18 +103,29 @@ namespace BaiTapCuaNhom
                 }
             }
         }
+        private byte[] TaoDataImageTuLinkFile(String AvartarDirec)
+        {
+            byte[] imageData = null;
+            using (FileStream fs = new FileStream(AvartarDirec, FileMode.Open, FileAccess.Read))
+            {
+                imageData = new byte[fs.Length];
+                fs.Read(imageData, 0, (int)fs.Length);
+            }
+
+            return imageData;
+        }
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if (tbButInProg.Text == "1")
             {
                 ketNoiCSDL.Open();
-                int res = ketNoiCSDL.ThemSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySInh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, pbAvatar.ImageLocation);
+                byte[] imageData = TaoDataImageTuLinkFile(pbAvatar.ImageLocation);
+                int res = ketNoiCSDL.ThemSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySinh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, imageData);
                 ketNoiCSDL.Close();
 
                 if (res > 0)
                 {
                     DialogResult dlRes = MessageBox.Show("thêm sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    
                     if (dlRes == DialogResult.OK)
                     {
                         ResetForm();
@@ -131,15 +136,16 @@ namespace BaiTapCuaNhom
             {
                 ketNoiCSDL.Open();
                 int res;
+                byte[] imageData = null;
 
                 if (tbCoClickChonAvartar.Text == "daclick")
                 {
-                    res = ketNoiCSDL.SuaSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySInh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, pbAvatar.ImageLocation);
-
+                    imageData = TaoDataImageTuLinkFile(pbAvatar.ImageLocation);
+                    res = ketNoiCSDL.SuaSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySinh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, imageData);
                 }
                 else
                 {
-                    res = ketNoiCSDL.SuaSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySInh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, "");
+                    res = ketNoiCSDL.SuaSinhVien(tbMaSV.Text, tbHoSV.Text, tbTenSV.Text, dtpNgaySinh.Value, cbbGioiTinh.SelectedItem.ToString(), tbMaKhoa.Text, null);
                 }
 
                 ketNoiCSDL.Close();
@@ -164,6 +170,12 @@ namespace BaiTapCuaNhom
         {
             this.Close();
         }
+        private Image ChuyenVeHinhAnh(byte[] hinh)
+        {
+            MemoryStream ms = new MemoryStream(hinh);
+            Image result = Image.FromStream(ms);
+            return result;
+        }
         private void dgvDs_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             pnNhapThongTin.Enabled = true;
@@ -179,7 +191,7 @@ namespace BaiTapCuaNhom
             tbMaSV.Text = dr["MaSV"].ToString();
             tbHoSV.Text = dr["HoSV"].ToString();
             tbTenSV.Text = dr["TenSV"].ToString();
-            dtpNgaySInh.Text = dr["NgaySinh"].ToString();
+            dtpNgaySinh.Text = dr["NgaySinh"].ToString();
             cbbGioiTinh.Text = dr["GioiTinh"].ToString();
             tbMaKhoa.Text = dr["MaKhoa"].ToString();
 
@@ -191,12 +203,6 @@ namespace BaiTapCuaNhom
             pbAvatar.Image = image;
 
             pnNhapThongTin.Enabled = false;
-        }
-        private Image ChuyenVeHinhAnh(byte[] hinh)
-        {
-            MemoryStream ms = new MemoryStream(hinh);
-            Image result = Image.FromStream(ms);
-            return result;
         }
         private void btnChonAvatar_Click(object sender, EventArgs e)
         {

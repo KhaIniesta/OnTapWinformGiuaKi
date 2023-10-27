@@ -55,7 +55,7 @@
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.dtpNgaySInh = new System.Windows.Forms.DateTimePicker();
+            this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
             this.pbAvatar = new System.Windows.Forms.PictureBox();
             this.btnChonAvatar = new System.Windows.Forms.Button();
             this.tbMaSV = new System.Windows.Forms.TextBox();
@@ -69,11 +69,11 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.pnNhapThongTin = new System.Windows.Forms.Panel();
+            this.tbCoClickChonAvartar = new System.Windows.Forms.TextBox();
             this.pnFilter = new System.Windows.Forms.Panel();
             this.pnButton = new System.Windows.Forms.Panel();
             this.tbButInProg = new System.Windows.Forms.TextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.tbCoClickChonAvartar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.pnNhapThongTin.SuspendLayout();
@@ -335,13 +335,13 @@
             this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // dtpNgaySInh
+            // dtpNgaySinh
             // 
-            this.dtpNgaySInh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgaySInh.Location = new System.Drawing.Point(105, 84);
-            this.dtpNgaySInh.Name = "dtpNgaySInh";
-            this.dtpNgaySInh.Size = new System.Drawing.Size(114, 22);
-            this.dtpNgaySInh.TabIndex = 18;
+            this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNgaySinh.Location = new System.Drawing.Point(105, 84);
+            this.dtpNgaySinh.Name = "dtpNgaySinh";
+            this.dtpNgaySinh.Size = new System.Drawing.Size(114, 22);
+            this.dtpNgaySinh.TabIndex = 18;
             // 
             // pbAvatar
             // 
@@ -462,7 +462,7 @@
             this.pnNhapThongTin.Controls.Add(this.label6);
             this.pnNhapThongTin.Controls.Add(this.label7);
             this.pnNhapThongTin.Controls.Add(this.tbMaKhoa);
-            this.pnNhapThongTin.Controls.Add(this.dtpNgaySInh);
+            this.pnNhapThongTin.Controls.Add(this.dtpNgaySinh);
             this.pnNhapThongTin.Controls.Add(this.tbTenSV);
             this.pnNhapThongTin.Controls.Add(this.tbMaSV);
             this.pnNhapThongTin.Controls.Add(this.tbHoSV);
@@ -470,6 +470,14 @@
             this.pnNhapThongTin.Name = "pnNhapThongTin";
             this.pnNhapThongTin.Size = new System.Drawing.Size(666, 171);
             this.pnNhapThongTin.TabIndex = 23;
+            // 
+            // tbCoClickChonAvartar
+            // 
+            this.tbCoClickChonAvartar.Location = new System.Drawing.Point(68, 134);
+            this.tbCoClickChonAvartar.Name = "tbCoClickChonAvartar";
+            this.tbCoClickChonAvartar.Size = new System.Drawing.Size(28, 22);
+            this.tbCoClickChonAvartar.TabIndex = 26;
+            this.tbCoClickChonAvartar.Visible = false;
             // 
             // pnFilter
             // 
@@ -513,14 +521,6 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // tbCoClickChonAvartar
-            // 
-            this.tbCoClickChonAvartar.Location = new System.Drawing.Point(68, 134);
-            this.tbCoClickChonAvartar.Name = "tbCoClickChonAvartar";
-            this.tbCoClickChonAvartar.Size = new System.Drawing.Size(28, 22);
-            this.tbCoClickChonAvartar.TabIndex = 26;
-            this.tbCoClickChonAvartar.Visible = false;
             // 
             // Form1
             // 
@@ -572,7 +572,7 @@
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnThoat;
-        private System.Windows.Forms.DateTimePicker dtpNgaySInh;
+        private System.Windows.Forms.DateTimePicker dtpNgaySinh;
         private System.Windows.Forms.PictureBox pbAvatar;
         private System.Windows.Forms.Button btnChonAvatar;
         private System.Windows.Forms.TextBox tbMaSV;
